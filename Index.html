@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Generatore Descrizioni Lattine Monster</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #e8f5e9);
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button, textarea, input[type=range] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #00c853;
+      color: white;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+    }
+    textarea {
+      height: 150px;
+      margin-top: 20px;
+      resize: none;
+    }
+    #copyButton {
+      background-color: #0277bd;
+      margin-top: 10px;
+    }
+    #condValue {
+      font-weight: bold;
+      margin-top: 5px;
+      text-align: center;
+    }
+    #copiedMsg {
+      text-align: center;
+      color: #2e7d32;
+      font-weight: bold;
+      display: none;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generatore Descrizioni Monster</h1><label for="nome">Nome Lattina</label> <input type="text" id="nome" placeholder="Es: Ultra Paradise">
+
+<label for="paese">Paese di Provenienza</label> <select id="paese"> <option value="🇺🇸|USA">USA</option> <option value="🇯🇵|Japan">Giappone</option> <option value="🇩🇪|Germany">Germania</option> <option value="🇬🇧|UK">Regno Unito</option> <option value="🇫🇷|France">Francia</option> <option value="🇮🇹|Italy">Italia</option> <option value="🇪🇸|Spain">Spagna</option> </select>
+
+<label for="stato">Stato</label> <select id="stato"> <option value="Full/Piena">Piena</option> <option value="Empty/Vuota">Vuota</option> </select>
+
+<label for="condizione">Condizione (1-10)</label> <input type="range" id="condizione" min="1" max="10" value="10" oninput="document.getElementById('condValue').textContent = 'Condizione: ' + this.value">
+
+  <div id="condValue">Condizione: 10</div><label for="sku">SKU</label> <input type="text" id="sku" placeholder="Es: 1220">
+
+<button onclick="generaDescrizione()">Genera Descrizione</button> <button id="copyButton" onclick="copiaDescrizione()">Copia negli appunti</button>
+
+  <div id="copiedMsg">✅ Descrizione copiata!</div>
+  <textarea id="descrizione" readonly placeholder="La tua descrizione apparirà qui..."></textarea>  <footer>
+    Creato da Piggy [SW]
+  </footer>  <script>
+    function generaDescrizione() {
+      const nome = document.getElementById("nome").value.trim().toUpperCase();
+      const [bandiera, paese] = document.getElementById("paese").value.split('|');
+      const stato = document.getElementById("stato").value;
+      const condizione = document.getElementById("condizione").value;
+      const sku = document.getElementById("sku").value.trim();
+
+      const descrizione = `${bandiera}${nome}${bandiera}\n\n` +
+        `Status: ${stato}\n` +
+        `Country: ${paese}${bandiera}\n` +
+        `Sku: ${sku}\n` +
+        `Condition: ${condizione}/10\n\n` +
+        `Dm: @not_simoo`;
+
+      document.getElementById("descrizione").value = descrizione;
+    }
+
+    function copiaDescrizione() {
+      const descrizione = document.getElementById("descrizione");
+      descrizione.select();
+      descrizione.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(descrizione.value).then(() => {
+        const msg = document.getElementById("copiedMsg");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 1500);
+      });
+    }
+  </script></body>
+</html>
