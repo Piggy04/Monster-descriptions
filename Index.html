@@ -1,25 +1,33 @@
 <!DOCTYPE html><html lang="it">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generatore Descrizioni Lattine Monster</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, #e0f7fa, #e8f5e9);
       padding: 20px;
+      margin: 0;
+    }
+    .container {
       max-width: 600px;
       margin: auto;
+      background-color: #ffffff;
+      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
       color: #2e7d32;
+      font-size: 1.8em;
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
+      font-size: 1em;
     }
     input, select, button, textarea, input[type=range] {
       width: 100%;
@@ -28,6 +36,7 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+      font-size: 1em;
     }
     button {
       background-color: #00c853;
@@ -67,22 +76,45 @@
   </style>
 </head>
 <body>
-  <h1>Generatore Descrizioni Monster</h1><label for="nome">Nome Lattina</label> <input type="text" id="nome" placeholder="Es: Ultra Paradise">
+  <div class="container">
+    <h1>Generatore Descrizioni Monster</h1><label for="nome">Nome Lattina</label>
+<input type="text" id="nome" placeholder="Es: Ultra Paradise">
 
-<label for="paese">Paese di Provenienza</label> <select id="paese"> <option value="🇺🇸|USA">USA</option> <option value="🇯🇵|Japan">Giappone</option> <option value="🇩🇪|Germany">Germania</option> <option value="🇬🇧|UK">Regno Unito</option> <option value="🇫🇷|France">Francia</option> <option value="🇮🇹|Italy">Italia</option> <option value="🇪🇸|Spain">Spagna</option> </select>
+<label for="paese">Paese di Provenienza</label>
+<select id="paese">
+  <option value="🇺🇸|USA">USA</option>
+  <option value="🇯🇵|Japan">Giappone</option>
+  <option value="🇩🇪|Germany">Germania</option>
+  <option value="🇬🇧|UK">Regno Unito</option>
+  <option value="🇫🇷|France">Francia</option>
+  <option value="🇮🇹|Italy">Italia</option>
+  <option value="🇪🇸|Spain">Spagna</option>
+</select>
 
-<label for="stato">Stato</label> <select id="stato"> <option value="Full/Piena">Piena</option> <option value="Empty/Vuota">Vuota</option> </select>
+<label for="stato">Stato</label>
+<select id="stato">
+  <option value="Full/Piena">Piena</option>
+  <option value="Empty/Vuota">Vuota</option>
+</select>
 
-<label for="condizione">Condizione (1-10)</label> <input type="range" id="condizione" min="1" max="10" value="10" oninput="document.getElementById('condValue').textContent = 'Condizione: ' + this.value">
+<label for="condizione">Condizione (1-10)</label>
+<input type="range" id="condizione" min="1" max="10" value="10" oninput="document.getElementById('condValue').textContent = 'Condizione: ' + this.value">
+<div id="condValue">Condizione: 10</div>
 
-  <div id="condValue">Condizione: 10</div><label for="sku">SKU</label> <input type="text" id="sku" placeholder="Es: 1220">
+<label for="sku">SKU</label>
+<input type="text" id="sku" placeholder="Es: 1220">
 
-<button onclick="generaDescrizione()">Genera Descrizione</button> <button id="copyButton" onclick="copiaDescrizione()">Copia negli appunti</button>
+<button onclick="generaDescrizione()">Genera Descrizione</button>
+<button id="copyButton" onclick="copiaDescrizione()">Copia negli appunti</button>
 
-  <div id="copiedMsg">✅ Descrizione copiata!</div>
-  <textarea id="descrizione" readonly placeholder="La tua descrizione apparirà qui..."></textarea>  <footer>
-    Creato da Piggy [SW]
-  </footer>  <script>
+<div id="copiedMsg">✅ Descrizione copiata!</div>
+<textarea id="descrizione" readonly placeholder="La tua descrizione apparirà qui..."></textarea>
+
+<footer>
+  Creato con ❤️ da Piggy [SW]
+</footer>
+
+  </div>  <script>
     function generaDescrizione() {
       const nome = document.getElementById("nome").value.trim().toUpperCase();
       const [bandiera, paese] = document.getElementById("paese").value.split('|');
